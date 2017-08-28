@@ -1,7 +1,7 @@
 function! asyncomplete#sources#racer#get_source_options(opts) abort
-    return extend(a:opts, {
+    return extend({
         \     'refresh_pattern': '\k\+$'
-        \ })
+        \ }, a:opts)
 endfunction
 
 function! asyncomplete#sources#racer#completor(opts, ctx) abort
