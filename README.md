@@ -19,11 +19,11 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'keremc/asyncomplete-racer.vim'
 
-autocmd User asyncomplete_setup call asyncomplete#register_source({
+autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#racer#get_source_options({
             \ 'name': 'racer',
             \ 'whitelist': ['rust'],
             \ 'completor': function('asyncomplete#sources#racer#completor')
-            \ })
+            \ }))
 ```
 
 ## Configuration
@@ -31,12 +31,12 @@ autocmd User asyncomplete_setup call asyncomplete#register_source({
 If `racer` cannot be found in `PATH`, you must specify the path to it manually:
 
 ```vim
-autocmd User asyncomplete_setup call asyncomplete#register_source({
+autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#racer#get_source_options({
             \ 'name': 'racer',
             \ 'whitelist': ['rust'],
             \ 'completor': function('asyncomplete#sources#racer#completor'),
             \ 'config': {'racer_path': expand('~/.cargo/bin/racer')}
-            \ })
+            \ }))
 ```
 
 ## License
