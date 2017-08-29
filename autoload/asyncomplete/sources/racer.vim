@@ -42,8 +42,6 @@ function! s:handler(opts, ctx, matches, job_id, data, event) abort
         let text_length = len(matchstr(a:ctx['typed'], '\k\+$'))
         let start_column = cur_column - text_length
 
-        let g:my_opts = a:opts
-
         call asyncomplete#complete(a:opts['name'], a:ctx, start_column,
             \ a:matches)
     endif
