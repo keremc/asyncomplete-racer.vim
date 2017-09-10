@@ -1,7 +1,9 @@
-function! asyncomplete#sources#racer#get_source_options(opts) abort
-    return extend({
-        \     'refresh_pattern': '\k\+$'
-        \ }, a:opts)
+function! asyncomplete#sources#racer#get_source_options(...) abort
+    return extend(extend({
+        \     'name': 'racer',
+        \     'completor': function('asyncomplete#sources#racer#completor'),
+        \     'whitelist': ['rust']
+        \ }, a:0 >= 1 ? a:1 : {}), {'refresh_pattern': '\k\+$'})
 endfunction
 
 function! asyncomplete#sources#racer#completor(opts, ctx) abort

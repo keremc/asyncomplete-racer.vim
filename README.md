@@ -20,11 +20,7 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'keremc/asyncomplete-racer.vim'
 
 autocmd User asyncomplete_setup call asyncomplete#register_source(
-    \ asyncomplete#sources#racer#get_source_options({
-    \     'name': 'racer',
-    \     'whitelist': ['rust'],
-    \     'completor': function('asyncomplete#sources#racer#completor')
-    \ }))
+    \ asyncomplete#sources#racer#get_source_options())
 ```
 
 ## Configuration
