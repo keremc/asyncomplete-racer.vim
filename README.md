@@ -4,40 +4,37 @@ Provide [Racer](https://github.com/racer-rust/racer) support for [asyncomplete.v
 
 ## Installation
 
-* Install Racer and the `rust-src` component:
+* Install Rust source code and Racer (assuming you have already installed Rust via [rustup](https://www.rustup.rs/)):
 
-```bash
+```sh
 rustup component add rust-src
 cargo install racer
 ```
 
-* Add this to your (Neo)vim configuration file:
+* Install this plugin and its dependencies: [async.vim](https://github.com/prabirshrestha/async.vim) and [asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim)
+* Append your Vim configuration file:
 
 ```vim
-" vim-plug
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'keremc/asyncomplete-racer.vim'
-
 autocmd User asyncomplete_setup call asyncomplete#register_source(
     \ asyncomplete#sources#racer#get_source_options())
 ```
 
 ## Configuration
 
-If `racer` cannot be found in `PATH`, you must specify the path to it manually:
+This plugin can be further configured by passing a dictionary to `asyncomplete#sources#racer#get_source_options()` like this:
 
 ```vim
 autocmd User asyncomplete_setup call asyncomplete#register_source(
     \ asyncomplete#sources#racer#get_source_options({
-    \     'name': 'racer',
-    \     'whitelist': ['rust'],
-    \     'completor': function('asyncomplete#sources#racer#completor'),
     \     'config': {
-    \         'racer_path': expand('~/.cargo/bin/racer')
+    \         'racer_path': ''
     \     }
     \ }))
 ```
+
+| Option | Default Value | Explanation |
+|---|---|---|
+| config.racer_path | ```'racer'``` | Path to the `racer` binary. If `racer` cannot be found in `PATH`, you must specify this manually. |
 
 ## License
 
