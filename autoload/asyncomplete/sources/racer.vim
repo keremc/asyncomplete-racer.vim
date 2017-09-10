@@ -9,15 +9,15 @@ endfunction
 function! asyncomplete#sources#racer#completor(opts, ctx) abort
     let config = get(a:opts, 'config', {})
     let racer_path = get(config, 'racer_path', 'racer')
+
     if !executable(racer_path)
         return
     endif
 
     let tmp_file = s:write_to_tmp_file()
 
-    let cmd = [racer_path, '--interface=tab-text', 'complete',
-        \ string(a:ctx['lnum']), string(a:ctx['col'] - 1),
-        \ a:ctx['filepath'], tmp_file]
+    let cmd = [racer_path, '--interface', 'tab-text', 'complete',
+        \ string(a:ctx['lnum']), string(a:ctx['col'] - 1), a:ctx['filepath'], tmp_file]
 
     let matches = []
 
@@ -35,17 +35,14 @@ function! s:handler(opts, ctx, matches, job_id, data, event) abort
                 continue
             endif
 
-            call add(a:matches, {
-                \ 'word': fields[1], 'menu': fields[6],
-                \ 'dup': 1, 'icase': 1})
+            call add(a:matches, {'word': fields[1], 'menu': fields[6], 'dup': 1, 'icase': 1})
         endfor
     elseif a:event == 'exit'
         let cur_column = a:ctx['col']
         let text_length = len(matchstr(a:ctx['typed'], '\k\+$'))
         let start_column = cur_column - text_length
 
-        call asyncomplete#complete(a:opts['name'], a:ctx, start_column,
-            \ a:matches)
+        call asyncomplete#complete(a:opts['name'], a:ctx, start_column, a:matches)
     endif
 endfunction
 
