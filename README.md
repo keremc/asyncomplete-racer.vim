@@ -11,7 +11,7 @@ rustup component add rust-src
 cargo install racer
 ```
 
-* Install this plugin and its dependencies: [async.vim](https://github.com/prabirshrestha/async.vim) and [asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim)
+* Install this plugin and its dependencies: [async.vim](https://github.com/prabirshrestha/async.vim) and asyncomplete.vim
 * Append your Vim configuration file:
 
 ```vim
